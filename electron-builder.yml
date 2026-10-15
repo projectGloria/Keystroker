@@ -1,0 +1,42 @@
+appId: com.nihil.keystroker
+productName: Keystroker
+copyright: Copyright © 2026 Nihil
+
+directories:
+  output: release
+  buildResources: public
+
+files:
+  - dist/**/*
+  - electron/**/*
+  - package.json
+
+extraResources:
+  - from: sounds
+    to: sounds
+    filter:
+      - "**/*"
+  - from: public/tray-icon.png
+    to: tray-icon.png
+  - from: mute_sys.py
+    to: mute_sys.py
+
+asar: true
+asarUnpack:
+  - "**/node_modules/uiohook-napi/**/*"
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: public/icon.ico
+  artifactName: ${productName}-Setup-${version}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Keystroker
+  deleteAppDataOnUninstall: false
