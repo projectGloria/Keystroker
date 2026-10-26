@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.18" />
+      <stop offset="60%" stop-color="#1e1b4b" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#0a0c10" stop-opacity="1" />
+    </radialGradient>
+
+    <!-- Glass App Card Gradient -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#161922" />
+      <stop offset="100%" stop-color="#11131a" />
+    </linearGradient>
+
+    <!-- Logo Gradient -->
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+
+    <!-- Toggle Active Gradient -->
+    <linearGradient id="toggleActive" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+
+    <!-- Slider Track Gradient -->
+    <linearGradient id="sliderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadowApp" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000000" flood-opacity="0.75" />
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#4f46e5" flood-opacity="0.2" />
+    </filter>
+
+    <filter id="glowBadge" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#6366f1" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="920" height="520" rx="16" fill="#0c0e14" />
+  <rect width="920" height="520" rx="16" fill="url(#bgGlow)" />
+
+  <!-- Grid Pattern -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="520" />
+    <line x1="200" y1="0" x2="200" y2="520" />
+    <line x1="320" y1="0" x2="320" y2="520" />
+    <line x1="440" y1="0" x2="440" y2="520" />
+    <line x1="560" y1="0" x2="560" y2="520" />
+    <line x1="680" y1="0" x2="680" y2="520" />
+    <line x1="800" y1="0" x2="800" y2="520" />
+    <line x1="0" y1="80" x2="920" y2="80" />
+    <line x1="0" y1="180" x2="920" y2="180" />
+    <line x1="0" y1="280" x2="920" y2="280" />
+    <line x1="0" y1="380" x2="920" y2="380" />
+    <line x1="0" y1="460" x2="920" y2="460" />
+  </g>
+
+  <!-- Left Side Badges & Visual Waves -->
+  <g transform="translate(60, 160)">
+    <!-- Audio Wave Lines -->
+    <path d="M 0 100 Q 25 40 50 100 T 100 100 T 150 100" fill="none" stroke="#6366f1" stroke-opacity="0.3" stroke-width="2" />
+    <path d="M 0 100 Q 25 10 50 100 T 100 100 T 150 100" fill="none" stroke="#a855f7" stroke-opacity="0.25" stroke-width="2" />
+    
+    <!-- Floating Feature Pill 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="180" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <circle cx="28" cy="24" r="10" fill="#10b981" fill-opacity="0.2" />
+      <circle cx="28" cy="24" r="5" fill="#10b981" />
+      <text x="48" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Zero Latency Audio</text>
+    </g>
+
+    <!-- Floating Feature Pill 2 -->
+    <g transform="translate(10, 64)">
+      <rect width="170" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <text x="24" y="30" font-size="16">⌨️</text>
+      <text x="50" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">21 Switch Profiles</text>
+    </g>
+
+    <!-- Floating Feature Pill 3 -->
+    <g transform="translate(-10, 128)">
+      <rect width="190" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <text x="22" y="30" font-size="16">🖱️</text>
+      <text x="48" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Mouse Microswitch</text>
+    </g>
+  </g>
+
+  <!-- Right Side Ambient Features -->
+  <g transform="translate(700, 160)">
+    <g transform="translate(0, 10)">
+      <rect width="165" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <text x="20" y="30" font-size="16">🔔</text>
+      <text x="46" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">System Tray HUD</text>
+    </g>
+
+    <g transform="translate(-15, 74)">
+      <rect width="180" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <text x="20" y="30" font-size="16">🔕</text>
+      <text x="46" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Windows Dings Muted</text>
+    </g>
+
+    <g transform="translate(10, 138)">
+      <rect width="165" height="48" rx="24" fill="#151822" stroke="#2d3345" stroke-width="1.2" />
+      <text x="20" y="30" font-size="16">⚡</text>
+      <text x="46" y="29" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Native C++ Hooks</text>
+    </g>
+  </g>
+
+  <!-- CENTER APP WINDOW -->
+  <g transform="translate(285, 35)" filter="url(#shadowApp)">
+    <!-- App Window Frame -->
+    <rect width="350" height="450" rx="20" fill="url(#cardBg)" stroke="#262b3a" stroke-width="1.5" />
+
+    <!-- Window Header -->
+    <g transform="translate(22, 22)">
+      <!-- Logo Box -->
+      <rect width="42" height="42" rx="10" fill="url(#logoGrad)" filter="url(#glowBadge)" />
+      <text x="21" y="29" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="800" text-anchor="middle">K</text>
+
+      <!-- App Title & Subtitle -->
+      <text x="56" y="20" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" letter-spacing="-0.4">Keystroker</text>
+      <text x="56" y="35" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">Premium Typing Sound Engine</text>
+
+      <!-- Close Button -->
+      <g transform="translate(276, 8)">
+        <rect width="24" height="24" rx="6" fill="#1e222e" />
+        <path d="M 7 7 L 17 17 M 17 7 L 7 17" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Settings Group 1: Toggles -->
+    <g transform="translate(18, 86)">
+      <rect width="314" height="152" rx="14" fill="#1a1d26" stroke="#262a38" stroke-width="1" />
+
+      <!-- Row 1: Pause Sounds (Off) -->
+      <g transform="translate(14, 16)">
+        <text x="0" y="14" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Pause Sounds</text>
+        <text x="0" y="28" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5">Instantly mute all sounds</text>
+        <!-- Toggle Off -->
+        <rect x="246" y="4" width="38" height="20" rx="10" fill="#2d3345" />
+        <circle cx="256" cy="14" r="7" fill="#94a3b8" />
+      </g>
+
+      <line x1="14" y1="62" x2="300" y2="62" stroke="#262b3a" stroke-width="1" />
+
+      <!-- Row 2: Mouse Click Sounds (Active/On) -->
+      <g transform="translate(14, 66)">
+        <text x="0" y="14" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Mouse Click Sounds</text>
+        <text x="0" y="28" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5">Mechanical click on mouse press</text>
+        <!-- Toggle On -->
+        <rect x="246" y="4" width="38" height="20" rx="10" fill="url(#toggleActive)" />
+        <circle cx="274" cy="14" r="7" fill="#ffffff" />
+      </g>
+
+      <line x1="14" y1="112" x2="300" y2="112" stroke="#262b3a" stroke-width="1" />
+
+      <!-- Row 3: Mute Windows Sounds (Active/On) -->
+      <g transform="translate(14, 116)">
+        <text x="0" y="14" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Mute Windows Sounds</text>
+        <text x="0" y="28" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5">Suppresses OS system dings</text>
+        <!-- Toggle On -->
+        <rect x="246" y="4" width="38" height="20" rx="10" fill="url(#toggleActive)" />
+        <circle cx="274" cy="14" r="7" fill="#ffffff" />
+      </g>
+    </g>
+
+    <!-- Settings Group 2: Volume & Profiles -->
+    <g transform="translate(18, 252)">
+      <rect width="314" height="136" rx="14" fill="#1a1d26" stroke="#262a38" stroke-width="1" />
+
+      <!-- Volume Row -->
+      <g transform="translate(14, 16)">
+        <text x="0" y="14" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Volume</text>
+        <text x="0" y="28" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5">Adjust typing acoustic intensity</text>
+        
+        <!-- Slider Track -->
+        <rect x="175" y="11" width="110" height="6" rx="3" fill="#2d3345" />
+        <rect x="175" y="11" width="75" height="6" rx="3" fill="url(#sliderGrad)" />
+        <circle cx="250" cy="14" r="7" fill="#ffffff" filter="url(#glowBadge)" />
+      </g>
+
+      <line x1="14" y1="64" x2="300" y2="64" stroke="#262b3a" stroke-width="1" />
+
+      <!-- Sound Profile Row -->
+      <g transform="translate(14, 76)">
+        <text x="0" y="14" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Sound Profile</text>
+        <text x="0" y="28" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5">Select your switch acoustic</text>
+
+        <!-- Dropdown Selector Box -->
+        <g transform="translate(160, 4)">
+          <rect width="126" height="30" rx="8" fill="#212532" stroke="#363c50" stroke-width="1" />
+          <text x="10" y="19" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="600">Holy Panda</text>
+          <!-- Down Chevron -->
+          <path d="M 104 12 L 109 17 L 114 12" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </g>
+      </g>
+    </g>
+
+    <!-- Footer Caption inside window -->
+    <text x="175" y="415" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" text-anchor="middle">Click outside to hide • Right click tray to exit</text>
+  </g>
+</svg>
