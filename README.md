@@ -1,226 +1,155 @@
 <div align="center">
 
-<img src="public/icon.png" alt="Keystroker Logo" width="120" height="120" />
+<img src="public/icon.png" alt="Keystroker Logo" width="112" height="112" />
 
 # Keystroker
 
-**A sleek, zero-latency mechanical keyboard & mouse sound engine for Windows**
+A low-latency mechanical keyboard and mouse click sound engine for Windows.
 
-*Transform every keystroke and mouse click into satisfying tactile acoustic feedback — powered by Electron, React, TypeScript, and the Web Audio API.*
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Platform: Windows](https://img.shields.io/badge/Platform-Windows%20x64-0078D4.svg?logo=windows)
+![Electron](https://img.shields.io/badge/Electron-44-47848F.svg?logo=electron)
+![React](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6.svg?logo=typescript)
 
-<p>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-00B074.svg?style=flat-square" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/Platform-Windows%20x64-0078D4.svg?style=flat-square&logo=windows" alt="Platform: Windows x64" />
-  <img src="https://img.shields.io/badge/Electron-44-47848F.svg?style=flat-square&logo=electron" alt="Electron" />
-  <img src="https://img.shields.io/badge/React-19-61DAFB.svg?style=flat-square&logo=react" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6.svg?style=flat-square&logo=typescript" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Sound%20Profiles-21%20Included-8A2BE2.svg?style=flat-square" alt="21 Sound Profiles" />
-  <img src="https://img.shields.io/badge/Latency-Sub--millisecond-success.svg?style=flat-square" alt="Zero Latency Audio" />
+<p align="center">
+  <img src="docs/assets/keystroker-preview.svg" alt="Keystroker Sound Engine HUD Interface Preview" width="880" />
 </p>
 
----
-
-<p>
-  <a href="#-about-keystroker">About</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-visual-tour">Visual Tour</a> •
-  <a href="#-sound-profiles-library">Sound Profiles</a> •
-  <a href="#-how-it-works">How It Works</a> •
-  <a href="#-installation--usage">Installation</a> •
-  <a href="#-building-from-source">Building</a> •
-  <a href="#-icon--design-philosophy">Design</a> •
-  <a href="#-license--credits">License</a>
-</p>
-
-<picture>
-  <img
-    width="920"
-    src="docs/assets/keystroker-preview.svg"
-    alt="Keystroker Sound Engine Interface Preview"
-  />
-</picture>
+[About](#about) • [Features](#features) • [Screenshots](#screenshots) • [Sound Profiles](#sound-profiles) • [How It Works](#how-it-works) • [Installation](#installation) • [Usage](#usage) • [Building from Source](#building-from-source) • [Configuration](#configuration) • [Contributing](#contributing) • [License & Credits](#license--credits)
 
 </div>
 
 ---
 
-## 🔊 About Keystroker
+## About
 
-Typing on a standard membrane laptop or quiet chiclet keyboard often lacks the deep acoustic satisfaction and tactile feedback that mechanical keyboard enthusiasts adore. 
-
-**Keystroker** is an ultra-lightweight, hardware-accelerated sound engine designed specifically for Windows. Running quietly as a background daemon, it intercepts system-wide keystrokes and mouse clicks in real time, triggering studio-grade mechanical switch and microswitch acoustics through your headphones or speakers with imperceptible latency.
-
-Whether you crave the deep, pillowy "thock" of electro-capacitive **Topre** domes, the tactile snap of **Holy Panda** switches, the nostalgic clack of an **IBM Model M**, or crisp **mouse clicks**, Keystroker turns everyday typing and gaming into an immersive sensory ritual.
-
-- ⚡ **Zero-Latency Playback**: Employs Chromium's Web Audio API with pre-decoded hardware `AudioBuffer` pools for instant sound reproduction without CPU spikes or lag.
-- 🌐 **Global OS-Wide Hook**: Intercepts keys and clicks seamlessly across all software—browsers, code editors, terminals, and games—via native C++ bindings (`uiohook-napi`).
-- 🎛️ **Modern Floating HUD**: A draggable, frameless dark glass overlay positioned conveniently near your system tray that auto-dismisses when you click away.
-- 🔒 **100% Offline & Private**: Zero telemetry, no cloud accounts, and no keylogging. Keystroker only tracks key type classes (space, enter, backspace, normal, click) to assign the appropriate acoustic sample.
+Keystroker is a lightweight background application for Windows that plays high-fidelity mechanical keyboard and mouse click acoustics in real time as you type and click. Using low-level native OS hooks and Chromium's Web Audio API with pre-decoded audio buffers, it triggers switch acoustics with imperceptible sub-millisecond latency across every application, code editor, browser, and game. It runs quietly in the system tray, features a modern floating dark-mode HUD, and operates 100% offline with zero telemetry or keystroke logging.
 
 ---
 
-## ✨ Key Features
+## Features
 
-<table>
-  <tr>
-    <td width="50%">
-      <h3>⚡ Global Native Interception</h3>
-      <p>Low-level Windows event interception via <code>uiohook-napi</code> capturing key presses and mouse clicks across all applications without active window focus.</p>
-    </td>
-    <td width="50%">
-      <h3>🎧 21 Studio Sound Profiles</h3>
-      <p>Curated sound collections spanning mechanical legends (Topre, Holy Panda, IBM Model M), Cherry MX switches, typewriters, and retro arcade synthesizers.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🖱️ Tactile Mouse Clicks</h3>
-      <p>Brings mechanical microswitch feedback to mouse presses, automatically pitch-scaled for authentic peripheral acoustics.</p>
-    </td>
-    <td width="50%">
-      <h3>🚀 Zero-Latency Audio Engine</h3>
-      <p>Interactive-hint Web Audio architecture with pre-cached buffers, micro-pitch jitter (±2%) for natural organic realism, and polyphonic voice mixing.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🔕 Windows Sound Suppressor</h3>
-      <p>Optional integrated background utility to silence disruptive default Windows navigation clicks, dings, and chime alerts while typing.</p>
-    </td>
-    <td width="50%">
-      <h3>🪟 Sleek System Tray Integration</h3>
-      <p>Runs quietly in the notification area with a left-click toggle, context menu pause/exit, and automatic position memory.</p>
-    </td>
-  </tr>
-</table>
+- **Global OS-Wide Interception**: Low-level event hooks via `uiohook-napi` capture keystrokes and mouse presses across all active windows and full-screen games without requiring window focus.
+- **Sub-Millisecond Web Audio Engine**: Employs an interactive Web Audio pipeline with pre-decoded PCM `AudioBuffer` memory caching and unthrottled background playback (`backgroundThrottling: false`).
+- **21 Curated Sound Profiles**: Ships with 21 switch libraries spanning mechanical classics (Topre, Holy Panda, Cherry MX, Model M), manual typewriters, retro arcade synths, and novelty clicks.
+- **Tactile Mouse Click Feedback**: Intercepts mouse button presses and triggers authentic microswitch acoustic samples with dynamic pitch scaling.
+- **Natural Organic Micro-Jitter**: Injects `±0.02` random playback-rate variance into each strike to mirror genuine mechanical switch variance and avoid repetitive auditory fatigue.
+- **Floating Tray HUD**: Frameless, draggable glass interface that snaps near the Windows notification area and automatically dismisses when you click away.
+- **Windows Alert Suppressor**: Integrated helper script to silence default Windows navigation clicks and alerts (`explorer.exe`) while typing.
 
 ---
 
-## 🖼️ Visual Tour
-
-### 1. Minimalist Floating HUD
-A clean, frameless dark acrylic interface that stays out of your way. Adjust volume with a smooth slider, switch audio profiles on the fly, and toggle features with responsive switches.
+## Screenshots
 
 <p align="center">
-  <img src="docs/assets/keystroker-preview.svg" alt="Keystroker HUD Interface" width="820" />
+  <img src="docs/assets/keystroker-preview.svg" alt="Keystroker floating acrylic HUD interface" width="880" />
+  <br /><em>Floating HUD: Instant sound profile switching, smooth volume control, and fast toggles for pause, mouse clicks, and Windows sound suppression.</em>
 </p>
 
-### 2. High-Performance Audio Engine Pipeline
-From raw hardware interrupt to acoustic playback in under a millisecond. Keypress events are filtered, debounced, dispatched over IPC, and rendered through pre-decoded memory buffers.
-
 <p align="center">
-  <img src="docs/assets/pipeline.svg" alt="Real-time Audio Pipeline Diagram" width="820" />
+  <img src="docs/assets/pipeline.svg" alt="Keystroker low-latency audio processing pipeline" width="880" />
+  <br /><em>Audio Pipeline: Hardware interrupt handling, debouncing, key classification, and pre-decoded memory buffer playback.</em>
 </p>
 
-### 3. Windows Notification Area & Tray Controls
-Left-click the system tray icon to reveal the HUD right above the taskbar. Right-click to access instant controls to pause typing audio or exit the app.
-
 <p align="center">
-  <img src="docs/assets/tray-preview.svg" alt="Windows Tray Integration Demo" width="650" />
+  <img src="docs/assets/tray-preview.svg" alt="Keystroker Windows system tray integration" width="880" />
+  <br /><em>System Tray: One-click tray toggle to show or hide the HUD, with quick pause and exit controls in the context menu.</em>
 </p>
 
 ---
 
-## 🎹 Sound Profiles Library
+## Sound Profiles
 
-Keystroker ships out of the box with **21 distinct acoustic profiles**, each featuring dedicated audio samples for normal alphanumeric typing, spacebars, enter keys, backspace, and mouse clicks:
+Keystroker includes 21 sound profiles out of the box. Each profile maps dedicated acoustic samples for standard alphanumeric keys, spacebar, enter, backspace, and mouse clicks:
 
-| Category | Sound Profile | Acoustic Signature & Description |
+| Category | Profile | Acoustic Signature |
 | :--- | :--- | :--- |
-| **Enthusiast Mechanical** | **Topre** | Deep, luxurious, rounded electro-capacitive tactile thock |
-| | **Holy Panda** | Snappy, tactile, prominent clack with rich bottom-out |
-| | **Thocky** | Deep pitch, dampened acoustic profile beloved in custom builds |
-| | **Gateron Ink Black** | Silky-smooth linear switch sound with clean bottoming |
+| **Mechanical Enthusiast** | **Topre** | Deep, rounded electro-capacitive tactile thock |
+| | **Holy Panda** | Snappy, tactile clack with prominent bottom-out |
+| | **Thocky** | Deep, dampened acoustic profile favored in custom builds |
+| | **Gateron Ink Black** | Smooth linear switch acoustic with clean bottoming |
 | | **Mechanical** | Universal balanced mechanical switch acoustic |
-| **Cherry MX Family** | **Cherry MX Blue** | Crisp, high-pitched mechanical click with distinct tactile bump |
-| | **Cherry MX Brown** | Subtle tactile clack without loud click bar resonance |
+| **Cherry MX Family** | **Cherry MX Blue** | Crisp, high-pitched mechanical click with tactile bump |
+| | **Cherry MX Brown** | Subtle tactile clack without click-bar resonance |
 | | **Cherry MX Red** | Smooth, quiet linear travel with light switch report |
 | | **Clicky** | Sharp, pronounced acoustic snap for tactile typing purists |
-| **Vintage & Retro** | **IBM Model M** | Iconic buckling spring snap from the golden age of computing |
-| | **Typewriter Vintage** | Heavy mechanical carriage and steel hammer impacts |
+| **Vintage & Typewriters** | **IBM Model M** | Iconic buckling spring snap from classic computing |
+| | **Typewriter Vintage** | Heavy mechanical carriage and steel hammer strikes |
 | | **Typewriter Modern** | Crisp mid-century manual typewriter clack |
-| | **Typewriter** | Classic mechanical typewriter keys with resonant body reverb |
-| **Digital & Arcade** | **Opera GX** | Modern digital feedback inspired by high-energy gaming browsers |
+| | **Typewriter** | Classic typewriter keys with resonant body tone |
+| **Digital & Retro** | **Opera GX** | Punchy digital feedback inspired by high-energy gaming browsers |
 | | **8-Bit Retro** | Chiptune synth clicks reminiscent of 80s arcade cabinets |
-| | **Hacker Terminal** | Cyberpunk sci-fi console keystrokes |
-| | **Sci-Fi Blaster** | Futuristic energy weapon pulses on every stroke |
-| **Novelty & Ambient** | **Water Drops** | Calming, organic liquid droplets with resonant pitch |
+| | **Hacker Terminal** | Cyberpunk sci-fi console keystroke acoustics |
+| | **Sci-Fi Blaster** | Futuristic energy pulses on every keypress |
+| **Novelty & Ambient** | **Water Drops** | Calming, resonant liquid droplet sounds |
 | | **Wooden Blocks** | Hollow, woody percussive strikes with warm resonance |
 | | **Soft** | Gentle, muted tap suited for late-night typing and shared rooms |
-| | **Cheap Membrane** | Playful recreation of retro office rubber-dome keyboards |
+| | **Cheap Membrane** | Nostalgic recreation of vintage office rubber-dome keyboards |
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
-Keystroker coordinates low-level C++ native hooks with Chromium's Web Audio subsystem to deliver instantaneous, stutter-free sound:
+Keystroker bridges low-level C++ native OS hooks with Chromium's Web Audio subsystem:
 
-```
-[ Hardware Keyboard / Mouse ]
-              │
-              ▼
-   uiohook-napi (C++ Thread)
-   ├─ 25ms Anti-Flutter Debounce
-   └─ Key Classification (Normal, Space, Enter, Backspace, Click)
-              │
-              ▼
-   Electron Main Process (IPC)
-   └─ backgroundThrottling: false
-              │
-              ▼
-   Web Audio API (Renderer Engine)
-   ├─ Pre-Decoded AudioBuffer Cache
-   ├─ Micro-Pitch Jitter (±2% natural human variance)
-   └─ Linear Gain Staging
-              │
-              ▼
-   [ Windows Audio Drivers / Headphones ]
+```mermaid
+flowchart TD
+    A["Physical Keyboard & Mouse"] --> B["uIOhook Native C++ Hook"]
+    B --> C{"Event Filter & Debounce\n(25ms anti-flutter)"}
+    C -->|Space, Enter, Backspace, Normal, Click| D["Electron Main Process (IPC)"]
+    D --> E["Chromium Web Audio Engine\n(latencyHint: interactive)"]
+    E --> F["Pre-Decoded AudioBuffer Cache"]
+    F --> G["Micro-Pitch Jitter (±2% variance) & Gain"]
+    G --> H["Audio Output / Headphones"]
 ```
 
-### Key Architectural Highlights
-1. **Interactive Audio Context**: Initialized with `{ latencyHint: 'interactive' }` ensuring lowest possible hardware buffer sizes.
-2. **Pre-Decoded Audio Buffers**: Rather than reading `.wav` files on each keypress, samples are decoded into raw PCM memory buffers when a profile is selected.
-3. **Background Throttling Disabled**: Chromium naturally throttles background renderers to save power. Keystroker explicitly disables background throttling so sound triggers immediately even while heavy 3D games or compilers run.
-4. **Natural Pitch Micro-Jitter**: Real mechanical keyboards never sound 100% identical on repeated keystrokes. Keystroker injects a random `±0.02` playback rate jitter into each strike to eliminate robotic fatigue.
+1. **Native Interception**: `uiohook-napi` runs in a native thread to capture raw keyboard and mouse events globally.
+2. **Debounce & Classification**: Events within a 25ms window are debounced to prevent stuttering on held keys, and classified into key types (`normal`, `space`, `enter`, `backspace`, `click`).
+3. **Pre-Decoded Playback**: When a sound profile is chosen, audio files are pre-decoded into raw PCM `AudioBuffer` memory. Strikes trigger immediate hardware audio playback without disk I/O.
+4. **Unthrottled Background Execution**: `backgroundThrottling: false` ensures Chromium's renderer does not sleep or drop frames when the application window is hidden or unfocused.
 
 ---
 
-## 📦 Installation & Usage
+## Installation
 
-### Running the Windows Installer
+### Windows Installer (Recommended)
 
-Download the latest installer executable (`Keystroker-Setup-0.1.0.exe`) from the repository releases and run it:
+1. Download the latest `Keystroker-Setup-0.1.0.exe` from [Releases](https://github.com/projectGloria/Keystroker/releases).
+2. Run the installer.
+3. Launch Keystroker from your Start Menu or Desktop shortcut. The application will start and place an icon in your Windows system tray.
 
-```powershell
-release/Keystroker-Setup-0.1.0.exe
-```
+### Requirements
 
-Upon installation, Keystroker sets up:
-- Desktop and Start Menu shortcuts.
-- Silent startup capability in the Windows System Tray.
-- Persistent user configuration at `%APPDATA%\keystroker\keystroker-settings.json`.
-
-### Controls & Navigation
-
-- **Show / Hide**: Left-click the Keystroker icon in the system tray.
-- **Dismiss**: Simply click anywhere outside the popup HUD window to dismiss it.
-- **Reposition**: Click and drag the header bar to place the HUD anywhere on your desktop.
-- **Pause Audio**: Toggle **Pause Sounds** in the HUD or right-click the tray icon and choose **Pause Sounds**.
-- **Exit**: Right-click the tray icon and select **Exit Keystroker**.
+- **Operating System**: Windows 10 or Windows 11 (64-bit)
+- **Audio Output**: Any standard stereo headphones or speakers
 
 ---
 
-## 🛠️ Building from Source
+## Usage
+
+### Basic Controls
+
+- **Open / Hide HUD**: Left-click the Keystroker tray icon in the Windows notification area, or click the `✕` button to hide it.
+- **Dismiss**: Click anywhere outside the HUD window to hide it back to the tray.
+- **Reposition**: Drag the top header bar to place the floating window anywhere on your screen. The position is remembered automatically.
+- **Switch Profile**: Select any switch profile from the dropdown list.
+- **Adjust Volume**: Slide the volume slider between 0% and 100%.
+- **Pause Audio**: Toggle the **Pause Sounds** switch in the HUD, or right-click the tray icon and select **Pause Sounds**.
+- **Exit**: Right-click the system tray icon and click **Exit**.
+
+---
+
+## Building from Source
 
 ### Prerequisites
 
-Ensure the following tools are installed on your Windows environment:
-- **Node.js** (v18.x or newer; v20+ recommended)
-- **Python** (required for compiling native Node C++ modules via `node-gyp`)
-- **Visual Studio C++ Build Tools** (Desktop development with C++)
-- **Git for Windows**
+- [Node.js](https://nodejs.org/) (v18.x or newer; v20+ recommended)
+- [Python](https://www.python.org/) (required by `node-gyp` to compile native C++ modules)
+- Visual Studio C++ Build Tools (Desktop development with C++)
+- [Git](https://git-scm.com/)
 
-### Build Steps
+### Steps
 
 1. **Clone the repository:**
    ```powershell
@@ -233,43 +162,80 @@ Ensure the following tools are installed on your Windows environment:
    npm install
    ```
 
-3. **Start the local development server:**
+3. **Run development mode:**
    ```powershell
    npm run dev
    ```
-   *This starts Vite on `http://localhost:1420` and boots Electron with hot reload.*
+   *Starts the Vite dev server on `http://localhost:1420` and launches Electron with live reload.*
 
-4. **Package the Windows executable:**
+4. **Package the Windows installer:**
    ```powershell
    npm run build:win
    ```
-   The production NSIS installer will be output into the `release/` directory:
+   The production installer will be generated in the `release/` directory:
    ```
    release/Keystroker-Setup-0.1.0.exe
    ```
 
 ---
 
-## 🎨 Icon & Design Philosophy
+## Configuration
 
-<p align="center">
-  <img src="public/icon.png" alt="Keystroker Icon Close-up" width="108" height="108" />
-</p>
+Keystroker stores its persistent configuration in your Windows user profile at:
 
-> *"A bold, vibrant indigo and violet geometric keycap emblem representing acoustic energy and tactile precision."*
+```
+%APPDATA%\keystroker\keystroker-settings.json
+```
 
-The visual design is crafted to integrate harmoniously with Windows 11 Fluent and modern dark mode workspace environments:
-- **Deep Space Palette**: Layered `#15181e` and `#1a1d26` surfaces with subtle border strokes (`#232733`) prevent eye strain.
-- **Electric Indigo Accents**: The signature `#6366f1` to `#7c3aed` gradient evokes tactile mechanical precision and digital audio waveforms.
-- **Pixel-Crisp Assets**: Includes both multi-resolution Windows `.ico` and alpha-transparent `.png` icons formatted for standard desktop shortcuts and compact 16px/32px tray status bars.
+### Settings Schema
+
+```json
+{
+  "profile": "Topre",
+  "volume": 0.5,
+  "paused": false,
+  "muteSystem": false,
+  "mouseClicks": true
+}
+```
+
+<details>
+<summary><strong>Troubleshooting: Mute Windows Sounds</strong></summary>
+
+The optional **Mute Windows Sounds** toggle executes `mute_sys.py` using Windows Core Audio APIs via `pycaw`. If you want to use this feature when running from source:
+
+1. Ensure Python is added to your system `PATH`.
+2. Install the `pycaw` package:
+   ```powershell
+   pip install pycaw
+   ```
+
+</details>
 
 ---
 
-## 📄 License & Credits
+## Contributing
 
-Keystroker is open-source software licensed under the **[MIT License](LICENSE)**.
+Contributions, sound profiles, and bug fixes are welcome!
 
-- **Engine & Architecture**: Built with [Electron](https://www.electronjs.org/), [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), and [Vite](https://vitejs.dev/).
-- **Native Hooking**: Powered by [uiohook-napi](https://github.com/Tolik518/uiohook-napi) for cross-platform event interception.
-- **Sound Libraries**: Acoustic samples curated and balanced for headphones and desktop speakers.
-- **Author**: Created with ❤️ by [Nihil](https://github.com/projectGloria).
+1. Fork the repository.
+2. Create a feature branch:
+   ```powershell
+   git checkout -b feature/new-sound-profile
+   ```
+3. Commit your changes:
+   ```powershell
+   git commit -m "Add new sound profile"
+   ```
+4. Push to your branch and open a Pull Request.
+
+---
+
+## License & Credits
+
+Keystroker is open-source software licensed under the [MIT License](LICENSE).
+
+- **Architecture**: [Electron](https://www.electronjs.org/), [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), and [Vite](https://vitejs.dev/).
+- **Native Hooking**: [uiohook-napi](https://github.com/Tolik518/uiohook-napi) by Tolik518.
+- **Audio Synthesis & Samples**: Pre-processed and balanced for low-latency desktop reproduction.
+- **Author**: Created by [Nihil](https://github.com/projectGloria).
