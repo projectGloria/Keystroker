@@ -33,8 +33,15 @@ function loadSettings() {
 
 let currentSettings = loadSettings();
 
+const pressedKeys = new Set();
+const pressedMouseButtons = new Set();
+
 function saveSettings(newSettings) {
   currentSettings = { ...currentSettings, ...newSettings };
+  if (currentSettings.paused) {
+    pressedKeys.clear();
+    pressedMouseButtons.clear();
+  }
   try {
     fs.writeFileSync(settingsPath, JSON.stringify(currentSettings, null, 2), 'utf8');
   } catch (err) {
@@ -233,15 +240,13 @@ function setupTray() {
 }
 
 // Global Keystroke Listener
-let lastKeyTime = 0;
 function setupGlobalKeyHook() {
   uIOhook.on('keydown', (e) => {
     if (currentSettings.paused) return;
 
-    // Fast debounce: avoid repeated machine-gun sounds if a key is held
-    const now = Date.now();
-    if (now - lastKeyTime < 25) return;
-    lastKeyTime = now;
+    // Prevent repeated sound playback when pressing and holding a key (ignore OS auto-repeat)
+    if (pressedKeys.has(e.keycode)) return;
+    pressedKeys.add(e.keycode);
 
     let soundType = 'normal';
     if (e.keycode === UiohookKey.Space) {
@@ -257,16 +262,26 @@ function setupGlobalKeyHook() {
     }
   });
 
-  uIOhook.on('mousedown', () => {
+  uIOhook.on('keyup', (e) => {
+    pressedKeys.delete(e.keycode);
+  });
+
+  uIOhook.on('mousedown', (e) => {
     if (currentSettings.paused || currentSettings.mouseClicks === false) return;
 
-    const now = Date.now();
-    if (now - lastKeyTime < 25) return;
-    lastKeyTime = now;
+    // Prevent repeated click sound if mouse button is held down
+    const btn = e.button != null ? e.button : 'default';
+    if (pressedMouseButtons.has(btn)) return;
+    pressedMouseButtons.add(btn);
 
     if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.webContents.send('key-sound', 'click');
     }
+  });
+
+  uIOhook.on('mouseup', (e) => {
+    const btn = e.button != null ? e.button : 'default';
+    pressedMouseButtons.delete(btn);
   });
 
   uIOhook.start();
@@ -335,6 +350,8 @@ app.whenReady().then(() => {
 
 app.on('will-quit', () => {
   try {
+    pressedKeys.clear();
+    pressedMouseButtons.clear();
     uIOhook.stop();
   } catch (e) {
     // ignore
