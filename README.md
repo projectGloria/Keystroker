@@ -16,7 +16,7 @@ A low-latency mechanical keyboard and mouse click sound engine for Windows.
   <img src="docs/assets/keystroker-preview.svg" alt="Keystroker Sound Engine HUD Interface Preview" width="880" />
 </p>
 
-[About](#about) • [Features](#features) • [Screenshots](#screenshots) • [Sound Profiles](#sound-profiles) • [How It Works](#how-it-works) • [Installation](#installation) • [Usage](#usage) • [Building from Source](#building-from-source) • [Configuration](#configuration) • [Contributing](#contributing) • [License & Credits](#license--credits)
+[About](#about) • [Features](#features) • [Screenshots](#screenshots) • [Sound Profiles](#sound-profiles) • [How It Works](#how-it-works) • [Installation](#installation) • [Usage](#usage) • [Building from Source](#building-from-source) • [How to Release](#how-to-release) • [Configuration](#configuration) • [Contributing](#contributing) • [License & Credits](#license--credits)
 
 </div>
 
@@ -176,6 +176,23 @@ flowchart TD
    ```
    release/Keystroker-Setup-0.1.0.exe
    ```
+
+---
+
+## How to Release
+
+Automated Windows installer builds are handled by GitHub Actions (`.github/workflows/build-installers.yml`).
+
+1. **Create and push a version tag:**
+   ```bash
+   git tag v1.0.0
+   git push --tags
+   ```
+   You can also trigger a test build manually from the **Actions** tab using the **Build Installers** workflow (`workflow_dispatch`).
+
+2. **Download the installers:**
+   - **Tag builds (`v*`)**: Download `Keystroker-<version>-windows-x64.exe` from the repository's [Releases](https://github.com/projectGloria/Keystroker/releases) page, or from the `installers` artifact on the workflow run.
+   - **Manual builds**: Download the `installers` artifact from the completed workflow run under the **Actions** tab.
 
 ---
 
