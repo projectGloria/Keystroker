@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build and pack Windows x64 setup
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set version from tag
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          $version = $env:TAG -replace '^v', ''
+          npm version "$version" --no-git-tag-version --allow-same-version
+
+      - name: Build app (unpacked, no installer)
+        run: |
+          npm run build
+          npx electron-builder --win --x64 --dir --publish never
+
+      - name: Collect runtime files into app-dist
+        shell: pwsh
+        run: |
+          if (-not (Test-Path release/win-unpacked/Keystroker.exe)) {
+            Write-Error "release/win-unpacked/Keystroker.exe not found"
+            exit 1
+          }
+          New-Item -ItemType Directory -Force -Path app-dist | Out-Null
+          Copy-Item -Path release/win-unpacked/* -Destination app-dist -Recurse -Force
+          Get-ChildItem app-dist | Select-Object -First 50
+
+      - name: Make sure the release exists
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release view $env:TAG -R $env:REPO *> $null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $env:TAG -R $env:REPO --generate-notes --title $env:TAG
+            if ($LASTEXITCODE -ne 0) { throw "could not create release" }
+          }
+          $global:LASTEXITCODE = 0
+
+      - name: Pack with GloriaSetup
+        uses: projectGloria/GloriaSetup@v0.1.0
+        with:
+          app-dir: app-dist
+          manifest: gloria.toml
+          certificate: ${{ secrets.WINDOWS_PFX_BASE64 }}
+          certificate-password: ${{ secrets.WINDOWS_PFX_PASSWORD }}

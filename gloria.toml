@@ -1,0 +1,10 @@
+id          = "Keystroker"
+name        = "Keystroker"
+version     = "0.1.0"
+main_exe    = "Keystroker.exe"
+icon        = "public/icon.ico"
+accent      = "#f43f5e"
+description = "Zero-latency mechanical switch sound engine"
+needs_webview2 = false
+data_folders = ["%APPDATA%\\keystroker"]
+legacy_names = ["Keystroker"]
