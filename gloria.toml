@@ -1,6 +1,6 @@
 id          = "Keystroker"
 name        = "Keystroker"
-version     = "0.1.0"
+version     = "0.1.1"
 main_exe    = "Keystroker.exe"
 icon        = "public/icon.ico"
 accent      = "#f43f5e"
